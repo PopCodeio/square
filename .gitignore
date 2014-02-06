@@ -1,0 +1,8 @@
+*.DS_Store
+*.rbc
+.bundle
+.yardoc
+Gemfile.lock
+vendor/bundle
+coverage/*
+doc/*
