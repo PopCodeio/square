@@ -1,15 +1,15 @@
-require 'square/error'
+require 'square/error/base'
 
 module Square
-  class Error
+  module Error
     # Raised when Square returns a 5xx HTTP status code
-    class ServerError < Square::Error
+    class ServerError < Square::Error::Base
       MESSAGE = 'Server Error'
 
       # Create a new error from an HTTP environment
       #
       # @param response [Hash]
-      # @return [Square::Error]
+      # @return [Square::Error::Base]
       def self.from_response(response={})
         new(nil, response[:response_headers])
       end

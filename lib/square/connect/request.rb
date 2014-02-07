@@ -1,11 +1,11 @@
 require 'faraday'
 require 'faraday_middleware'
-require 'square/connect/configuration'
 require 'square/core_ext/faraday'
 require 'square/request'
 require 'square/response'
 require 'square/error/client_error'
 require 'square/error/server_error'
+require 'square/connect/configuration'
 
 module Square
   module Connect

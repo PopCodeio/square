@@ -1,9 +1,9 @@
-require 'square/error'
+require 'square/error/base'
 
 module Square
-  class Error
+  module Error
     # Raised when JSON parsing fails
-    class DecodeError < Square::Error
+    class DecodeError < Square::Error::Base
     end
   end
 end

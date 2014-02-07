@@ -4,7 +4,7 @@ describe Square::Response::RaiseError do
 
   describe '#on_complete' do
     before do
-      @raise_error = Square::Response::RaiseError.new({}, Square::Error)
+      @raise_error = Square::Response::RaiseError.new({}, Square::Error::Base)
     end
 
     it 'raises 400 Square::Error::BadRequest' do

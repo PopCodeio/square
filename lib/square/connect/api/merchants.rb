@@ -1,5 +1,5 @@
-require 'square/utils'
-require 'square/connect/merchant'
+require 'square/utils/api'
+require 'square/connect/model/merchant'
 
 module Square
   module Connect
