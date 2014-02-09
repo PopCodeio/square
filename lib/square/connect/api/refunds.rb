@@ -1,5 +1,5 @@
-require 'square/utils'
-require 'square/connect/refund'
+require 'square/utils/api'
+require 'square/connect/model/refund'
 
 module Square
   module Connect

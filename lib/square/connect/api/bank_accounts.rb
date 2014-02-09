@@ -1,5 +1,5 @@
-require 'square/utils'
-require 'square/connect/bank_account'
+require 'square/utils/api'
+require 'square/connect/model/bank_account'
 
 module Square
   module Connect

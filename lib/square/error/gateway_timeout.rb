@@ -1,7 +1,7 @@
 require 'square/error/server_error'
 
 module Square
-  class Error
+  module Error
     # Raised when Square returns the HTTP status code 504
     class GatewayTimeout < Square::Error::ServerError
       HTTP_STATUS_CODE = 504
