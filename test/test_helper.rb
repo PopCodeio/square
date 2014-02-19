@@ -20,7 +20,7 @@ WebMock.disable_net_connect!(allow: 'coveralls.io')
 def endpoint_for(api_name)
   case api_name
   when :connect
-    Square::Connect::Configuration::ENDPOINT
+    Square::Connect::Default::ENDPOINT
   else
     ''
   end
