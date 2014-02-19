@@ -6,16 +6,15 @@ module Square
 
       extend Forwardable
 
-      attr_accessor :api_version
+      attr_accessor :api_version, :endpoint
       def_delegator :options, :hash
-
-      ENDPOINT = 'https://connect.squareup.com/'.freeze unless defined? Square::Connect::Configuration::ENDPOINT
 
       class << self
 
         def keys
           @keys ||= [
-            :api_version
+            :api_version,
+            :endpoint
           ]
         end
 

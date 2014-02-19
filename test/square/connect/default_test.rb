@@ -14,4 +14,10 @@ describe Square::Connect::Default do
     end
   end
 
+  describe '.endpoint' do
+    it 'returns ::ENDPOINT' do
+      Square::Connect::Default.endpoint.must_equal Square::Connect::Default::ENDPOINT
+    end
+  end
+
 end

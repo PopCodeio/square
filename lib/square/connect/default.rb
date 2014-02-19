@@ -5,6 +5,8 @@ module Square
   module Connect
     module Default
 
+      ENDPOINT = 'https://connect.squareup.com/'.freeze unless defined? Square::Connect::Default::ENDPOINT
+
       API_VERSION = 1 unless defined? Square::Connect::Default::API_VERSION
 
       class << self
@@ -19,6 +21,10 @@ module Square
           API_VERSION
         end
 
+        # @return [String]
+        def endpoint
+          ENDPOINT
+        end
       end
 
     end

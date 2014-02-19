@@ -20,7 +20,7 @@ module Square
       def connection
         return @connection if @connection
 
-        @connection = Faraday.new(Square::Connect::Configuration::ENDPOINT) do |conn|
+        @connection = Faraday.new(Square::Connect.endpoint) do |conn|
           conn.request :oauth2, @access_token if @access_token
           conn.request :url_encoded
           conn.request :json
