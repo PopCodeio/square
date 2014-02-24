@@ -16,7 +16,15 @@ module Square
         # @param options
         # @param merchant_id [String]
         def refunds(options = {}, merchant_id = 'me')
-          objects_from_response(Square::Connect::Refund, :get, "/#{merchant_id}/refunds", options)
+          response = objects_from_response(Square::Connect::Refund, :get, "/#{merchant_id}/refunds", options)
+          refunds = response[:objects]
+
+          while response[:batch_token] && (options[:limit].nil? || (options[:limit] && options[:limit] > refunds.size))
+            response = objects_from_response(Square::Connect::Refund, :get, "/#{merchant_id}/refunds", {batch_token: response[:batch_token]})
+            refunds += response[:objects]
+          end
+
+          refunds
         end
 
       end

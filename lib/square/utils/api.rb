@@ -13,10 +13,15 @@ module Square
       # @param request_method [Symbol]
       # @param path [String]
       # @param options [Hash]
-      # @return [Array]
+      # @return [Hash]
       def objects_from_response(klass, request_method, path, options={})
-        response = send(request_method.to_sym, path_with_version(path), options)[:body]
-        objects_from_array(klass, response)
+        response = send(request_method.to_sym, path_with_version(path), options)
+        batch_token = parse_batch_token(response[:response_headers][:link])
+        objects = objects_from_array(klass, response[:body])
+        {
+          objects: objects,
+          batch_token: batch_token
+        }
       end
 
       # @param klass [Class]
@@ -52,6 +57,16 @@ module Square
         end
       rescue => ex
         raise ArgumentError.new 'invalid date'
+      end
+
+      # @param response_header_link [String]
+      # @return [String]
+      # @see https://connect.squareup.com/docs/connect#pagination
+      def parse_batch_token(response_header_link)
+        return if response_header_link.nil?
+        link = response_header_link.scan(/\<https:\/\/[^\?]+\?([^\>]*)\>; rel=\"next\"/)[0][0]
+        options = CGI::parse(link)
+        options['batch_token'].first
       end
 
     end
