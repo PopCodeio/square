@@ -28,7 +28,15 @@ module Square
         # @param options [Hash]
         # @param merchant_id [String]
         def payments(options = {}, merchant_id = 'me')
-          objects_from_response(Square::Connect::Payment, :get, "/#{merchant_id}/payments", options)
+          response = objects_from_response(Square::Connect::Payment, :get, "/#{merchant_id}/payments", options)
+          payments = response[:objects]
+
+          while response[:batch_token] && (options[:limit].nil? || (options[:limit] && options[:limit] > payments.size))
+            response = objects_from_response(Square::Connect::Payment, :get, "/#{merchant_id}/payments", {batch_token: response[:batch_token]})
+            payments += response[:objects]
+          end
+
+          payments
         end
 
       end

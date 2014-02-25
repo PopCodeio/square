@@ -16,14 +16,14 @@ describe Square::Utils::API do
       end
 
       def stub_get_for_array(path, options={})
-        {body: []}
+        {body: [], response_headers: {}}
       end
     end
   end
 
   describe '#objects_from_response' do
     it 'returns an array of instances of passed klass' do
-      response = @clean_room.send(:objects_from_response, CleanRoomForUtilsTest, :stub_get_for_array, '/square')
+      response = @clean_room.send(:objects_from_response, CleanRoomForUtilsTest, :stub_get_for_array, '/square')[:objects]
       response.size.must_equal response.select {|v| v.is_a? CleanRoomForUtilsTest}.size
     end
   end

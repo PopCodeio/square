@@ -28,7 +28,16 @@ module Square
         # @param options [Hash]
         # @param merchant_id [String]
         def settlements(options = {}, merchant_id = 'me')
-          objects_from_response(Square::Connect::Settlement, :get, "/#{merchant_id}/settlements", options)
+          response = objects_from_response(Square::Connect::Settlement, :get, "/#{merchant_id}/settlements", options)
+          settlements = response[:objects]
+
+          while response[:batch_token] && (options[:limit].nil? || (options[:limit] && options[:limit] > settlements.size))
+            response = objects_from_response(Square::Connect::Settlement, :get, "/#{merchant_id}/settlements", {batch_token: response[:batch_token]})
+            settlements += response[:objects]
+          end
+
+          settlements
+
         end
 
       end
