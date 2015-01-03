@@ -14,6 +14,7 @@ module Square
         # @raise [Square::Error::Unauthorized] Error raised when supplied user credentials are invalid.
         # @return [Square::Connect::Items]
         def items(merchant_id = 'me')
+          debugger
           object_from_response(Square::Connect::Item, :get, "/#{merchant_id}/items")
         end
       end
